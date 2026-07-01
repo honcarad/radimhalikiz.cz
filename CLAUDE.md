@@ -54,6 +54,25 @@ Preview runs at http://localhost:8080/.
 - **Custom `date` filter** is defined in `.eleventy.js` (dependency-free
   strftime-ish; supports `%Y %m %d %e %B`). There is no Luxon/date plugin.
 
+## SEO
+
+- **All SEO copy is centralized in `src/_data/site.js`** (`site.*`): domain,
+  default title/description, social image, contact/address, `sameAs` profiles.
+  Update the real domain, telephone, address and socials there.
+- `base.html` emits per-page `<title>`, meta description, canonical, robots,
+  Open Graph, Twitter Card, and two JSON-LD blocks (`DanceSchool` + `WebSite`).
+  Pages override via front matter: `title`, `description`, `image`, `ogType`,
+  `robots`.
+- `article.html` sets `ogType: article` and emits `Article` JSON-LD.
+- `absoluteUrl` filter (`.eleventy.js`) builds full URLs from `site.url` — used
+  for canonical/OG/sitemap/JSON-LD. JSON-LD values are wrapped in `| dump` so
+  text with quotes can't break the JSON.
+- `src/sitemap.njk` → `/sitemap.xml`, `src/robots.njk` → `/robots.txt`. Exclude
+  a page from the sitemap with `eleventyExcludeFromSitemap: true` in its front matter.
+- **TODO for launch:** add real `src/assets/og-image.jpg` (1200×630) and
+  `src/assets/logo.png` — they're referenced but not yet created, so social
+  previews and the org logo 404 until added.
+
 ## Gotchas
 
 - The HTMX `<script>` `integrity` hash in `base.html` is a placeholder — replace

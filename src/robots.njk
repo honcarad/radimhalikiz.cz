@@ -1,0 +1,9 @@
+---
+# Generates /robots.txt — tells crawlers they're welcome and where the sitemap is.
+permalink: /robots.txt
+eleventyExcludeFromCollections: true
+---
+User-agent: *
+Allow: /
+
+Sitemap: {{ "/sitemap.xml" | absoluteUrl }}

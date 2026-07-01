@@ -1,5 +1,7 @@
 ---
 layout: base.html
+# Tells base.html to emit <meta property="og:type" content="article">
+ogType: article
 ---
 
 <!--
@@ -8,6 +10,32 @@ layout: base.html
   above), so it only needs to render the article-specific chrome: the header
   built from the Markdown file's front matter, and the rendered body content.
 -->
+
+<!-- Article structured data — enables article rich results in search. -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": {{ title | dump | safe }},
+    "description": {{ (description or site.description) | dump | safe }},
+    "datePublished": {{ (date | date("%Y-%m-%d")) | dump | safe }},
+    "author": {
+      "@type": "Person",
+      "name": {{ author | dump | safe }}
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": {{ site.name | dump | safe }},
+      "logo": {
+        "@type": "ImageObject",
+        "url": {{ (site.logo | absoluteUrl) | dump | safe }}
+      }
+    },
+    "image": {{ ((image or site.image) | absoluteUrl) | dump | safe }},
+    "mainEntityOfPage": {{ (page.url | absoluteUrl) | dump | safe }}
+  }
+</script>
+
 <article class="mx-auto max-w-3xl px-4 py-16">
   <header class="mb-8 border-b border-gray-100 pb-8">
     <a href="/articles/" class="text-sm font-medium text-brand-700">&larr; Back to articles</a>

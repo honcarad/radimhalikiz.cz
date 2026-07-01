@@ -1,13 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ site.locale }}">
+  {#- Resolve the effective SEO values for this page, falling back to site defaults -#}
+  {%- set pageTitle = title or site.defaultTitle -%}
+  {%- set pageDescription = description or site.description -%}
+  {%- set pageImage = (image or site.image) | absoluteUrl -%}
+  {%- set canonical = page.url | absoluteUrl -%}
+  {%- set ogType = ogType or "website" -%}
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ title or "Rhythm & Motion — Dance Studio" }}</title>
-    <meta
-      name="description"
-      content="{{ description or 'A welcoming dance studio offering salsa, ballet, hip-hop and more.' }}"
-    />
+
+    <!-- ===================== Primary SEO ===================== -->
+    <title>{{ pageTitle }}</title>
+    <meta name="description" content="{{ pageDescription }}" />
+    <link rel="canonical" href="{{ canonical }}" />
+    <!-- Let search engines index & follow by default; a page can override with `robots` -->
+    <meta name="robots" content="{{ robots or 'index, follow' }}" />
+    {% if author %}<meta name="author" content="{{ author }}" />{% endif %}
+    <meta name="theme-color" content="#f3c813" />
+
+    <!-- ===================== Open Graph (Facebook, LinkedIn, etc.) ===================== -->
+    <meta property="og:type" content="{{ ogType }}" />
+    <meta property="og:site_name" content="{{ site.name }}" />
+    <meta property="og:title" content="{{ pageTitle }}" />
+    <meta property="og:description" content="{{ pageDescription }}" />
+    <meta property="og:url" content="{{ canonical }}" />
+    <meta property="og:image" content="{{ pageImage }}" />
+    <meta property="og:locale" content="{{ site.locale }}" />
+
+    <!-- ===================== Twitter Card ===================== -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ pageTitle }}" />
+    <meta name="twitter:description" content="{{ pageDescription }}" />
+    <meta name="twitter:image" content="{{ pageImage }}" />
+    {% if site.twitter %}<meta name="twitter:site" content="{{ site.twitter }}" />{% endif %}
 
     <!-- Fonts (matched to radimhalikiz.cz): Montserrat body, Poppins headings -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,6 +69,45 @@
 
       const application = Application.start();
       application.register("menu", MenuController);
+    </script>
+
+    <!-- ===================== Structured data (JSON-LD) ===================== -->
+    <!-- Describes the business to search engines so it can qualify for rich
+         results / a Knowledge Panel. `DanceSchool` is a schema.org type that
+         extends LocalBusiness. Each value is JSON-encoded via `| dump` so
+         quotes/apostrophes in the text can't break the JSON. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "DanceSchool",
+        "@id": {{ (site.url + "/#organization") | dump | safe }},
+        "name": {{ site.name | dump | safe }},
+        "legalName": {{ site.legalName | dump | safe }},
+        "url": {{ site.url | dump | safe }},
+        "description": {{ site.description | dump | safe }},
+        "image": {{ (site.image | absoluteUrl) | dump | safe }},
+        "logo": {{ (site.logo | absoluteUrl) | dump | safe }}
+        {%- if site.telephone %}, "telephone": {{ site.telephone | dump | safe }}{%- endif %}
+        {%- if site.email %}, "email": {{ site.email | dump | safe }}{%- endif %}
+        {%- if site.address.addressLocality %}, "address": {
+          "@type": "PostalAddress",
+          "streetAddress": {{ site.address.streetAddress | dump | safe }},
+          "addressLocality": {{ site.address.addressLocality | dump | safe }},
+          "postalCode": {{ site.address.postalCode | dump | safe }},
+          "addressCountry": {{ site.address.addressCountry | dump | safe }}
+        }{%- endif %}
+        {%- if site.sameAs | length %}, "sameAs": {{ site.sameAs | dump | safe }}{%- endif %}
+      }
+    </script>
+
+    <!-- WebSite entity — helps Google understand the site as a whole. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": {{ site.name | dump | safe }},
+        "url": {{ site.url | dump | safe }}
+      }
     </script>
   </head>
 

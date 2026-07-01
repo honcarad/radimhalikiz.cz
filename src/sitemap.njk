@@ -1,0 +1,16 @@
+---
+# Generates /sitemap.xml listing every page for search engines.
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for page in collections.all %}
+  {%- if not page.data.eleventyExcludeFromSitemap %}
+  <url>
+    <loc>{{ page.url | absoluteUrl }}</loc>
+    <lastmod>{{ page.date | date("%Y-%m-%d") }}</lastmod>
+  </url>
+  {%- endif %}
+{%- endfor %}
+</urlset>

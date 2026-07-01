@@ -6,8 +6,20 @@
  *    written straight to `dist/css/main.css`, so we only pass through the
  *    hand-written JS (Stimulus controllers) and any static partials/assets.
  */
+const site = require("./src/_data/site.js");
+
 module.exports = function (eleventyConfig) {
   // ---- Filters -------------------------------------------------------------
+  // Turn a root-relative path (or full URL) into an absolute URL using the
+  // production domain from site.js. Required for canonical/OG/sitemap/JSON-LD.
+  eleventyConfig.addFilter("absoluteUrl", (path = "/") => {
+    try {
+      return new URL(path, site.url).href;
+    } catch (e) {
+      return path;
+    }
+  });
+
   // A tiny, dependency-free strftime-style `date` filter.
   // Supports the tokens used in our templates: %Y %m %d %e %B.
   // Accepts a Date, an ISO string, or the literal "now".

@@ -206,6 +206,32 @@ get an email each time someone gets in touch.
 
 ---
 
+## 6b. Helping Google find you (SEO)
+
+The site is already set up to rank well on search engines — you just need to
+fill in a few real details. Open **`src/_data/site.js`** and update:
+
+- **`url`** — your real website address (once you know it from Netlify).
+- **`telephone`**, **`email`**, and **`address`** — your studio's contact info.
+- **`sameAs`** — the web addresses of your Instagram / Facebook / YouTube pages.
+
+Then add two images to the **`src/assets/`** folder:
+
+- **`og-image.jpg`** — the picture shown when someone shares your site on social
+  media (make it 1200×630 pixels).
+- **`logo.png`** — your studio logo.
+
+Every page automatically gets a proper title, description, social-media preview,
+and "structured data" (special hidden info that helps Google show your studio
+nicely in search results). A `sitemap.xml` and `robots.txt` are also created
+automatically so search engines can find every page. You don't need to do
+anything else for these.
+
+**Tip:** each article's `title` and `description` (the lines at the top of the
+`.md` file) are what show up in Google — so write them clearly and invitingly.
+
+---
+
 ## 7. Cheat sheet (the only commands you need)
 
 Type these in the Terminal, from inside the project folder:

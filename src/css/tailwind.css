@@ -1,0 +1,10 @@
+/* Tailwind entry file — compiled to dist/css/main.css by the Tailwind CLI. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: place custom component classes here.
+   @layer components {
+     .btn-brand { @apply inline-block rounded-full bg-brand px-6 py-3 font-semibold text-white transition hover:bg-brand-dark; }
+   }
+*/

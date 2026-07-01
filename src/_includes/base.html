@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title or "Rhythm & Motion — Dance Studio" }}</title>
+    <meta
+      name="description"
+      content="{{ description or 'A welcoming dance studio offering salsa, ballet, hip-hop and more.' }}"
+    />
+
+    <!-- Compiled Tailwind CSS (produced by the Tailwind CLI, see package.json) -->
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <!-- HTMX: high-power interactivity straight from HTML attributes -->
+    <script
+      src="https://unpkg.com/htmx.org@2.0.4"
+      integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Stimulus via an import map so we can `import` it as a native ES module -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@hotwired/stimulus": "https://unpkg.com/@hotwired/stimulus@3.2.2/dist/stimulus.js"
+        }
+      }
+    </script>
+
+    <!-- Boot Stimulus and register our controllers -->
+    <script type="module">
+      import { Application } from "@hotwired/stimulus";
+      import MenuController from "/js/controllers/menu_controller.js";
+
+      const application = Application.start();
+      application.register("menu", MenuController);
+    </script>
+  </head>
+
+  <body class="min-h-screen bg-white text-gray-900 antialiased">
+    <!-- ===================== Responsive Navbar ===================== -->
+    <!-- The whole nav is one Stimulus "menu" controller so the mobile
+         toggle button can flip the visibility of the links panel. -->
+    <header class="border-b border-gray-100" data-controller="menu">
+      <nav
+        class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4"
+        aria-label="Main navigation"
+      >
+        <a href="/" class="text-xl font-bold text-brand">Rhythm &amp; Motion</a>
+
+        <!-- Desktop links -->
+        <ul class="hidden items-center gap-8 md:flex">
+          <li><a class="hover:text-brand" href="/">Home</a></li>
+          <li><a class="hover:text-brand" href="/articles/salsa-basics/">Articles</a></li>
+          <li><a class="hover:text-brand" href="/#contact">Contact</a></li>
+        </ul>
+
+        <!-- Mobile toggle button -->
+        <button
+          type="button"
+          class="md:hidden"
+          data-action="menu#toggle"
+          aria-label="Toggle menu"
+        >
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </nav>
+
+      <!-- Mobile links panel — hidden by default, toggled by the controller -->
+      <ul
+        class="hidden flex-col gap-2 border-t border-gray-100 px-4 py-3 md:hidden"
+        data-menu-target="menu"
+      >
+        <li><a class="block py-1 hover:text-brand" href="/">Home</a></li>
+        <li><a class="block py-1 hover:text-brand" href="/articles/salsa-basics/">Articles</a></li>
+        <li><a class="block py-1 hover:text-brand" href="/#contact">Contact</a></li>
+      </ul>
+    </header>
+
+    <!-- ===================== Page content ===================== -->
+    <main>{{ content | safe }}</main>
+
+    <!-- ===================== Footer ===================== -->
+    <footer class="mt-16 border-t border-gray-100 py-8 text-center text-sm text-gray-500">
+      <p>&copy; {{ "now" | date("%Y") }} Rhythm &amp; Motion Dance Studio. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

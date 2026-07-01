@@ -1,0 +1,25 @@
+{
+  "name": "dance-studio",
+  "version": "1.0.0",
+  "description": "A HOWL-stack (HTML-first) static site for a dance studio, built with Eleventy, Tailwind, HTMX and Stimulus.",
+  "private": true,
+  "scripts": {
+    "//": "----- Development: run Eleventy + Tailwind watchers together -----",
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:11ty": "eleventy --serve --quiet",
+    "dev:css": "tailwindcss -i ./src/css/tailwind.css -o ./dist/css/main.css --watch",
+
+    "//build": "----- Production: build CSS first, then let Eleventy render -----",
+    "build": "npm-run-all build:11ty build:css",
+    "build:11ty": "eleventy",
+    "build:css": "tailwindcss -i ./src/css/tailwind.css -o ./dist/css/main.css --minify",
+
+    "clean": "rimraf dist"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^5.0.5",
+    "tailwindcss": "^3.4.0"
+  }
+}

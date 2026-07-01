@@ -3,7 +3,7 @@ layout: article.html
 title: "Salsa Basics: Your First Steps"
 date: 2026-06-15
 author: Radim Halík
-description: A gentle introduction to salsa for absolute beginners.
+description:   introduction to salsa for absolute beginners.
 tags: articles
 ---
 

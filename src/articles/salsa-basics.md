@@ -4,6 +4,7 @@ title: "Salsa Basics: Your First Steps"
 date: 2026-06-15
 author: Radim Halík
 description: A gentle introduction to salsa for absolute beginners.
+tags: articles
 ---
 
 Salsa is one of the most joyful and social dances you can learn. You don't need

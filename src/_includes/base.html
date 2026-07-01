@@ -9,6 +9,14 @@
       content="{{ description or 'A welcoming dance studio offering salsa, ballet, hip-hop and more.' }}"
     />
 
+    <!-- Fonts (matched to radimhalikiz.cz): Montserrat body, Poppins headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Poppins:wght@500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Compiled Tailwind CSS (produced by the Tailwind CLI, see package.json) -->
     <link rel="stylesheet" href="/css/main.css" />
 
@@ -47,12 +55,12 @@
         class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4"
         aria-label="Main navigation"
       >
-        <a href="/" class="text-xl font-bold text-brand">Rhythm &amp; Motion</a>
+        <a href="/" class="text-xl font-bold text-ink">Rhythm &amp; Motion</a>
 
         <!-- Desktop links -->
         <ul class="hidden items-center gap-8 md:flex">
           <li><a class="hover:text-brand" href="/">Home</a></li>
-          <li><a class="hover:text-brand" href="/articles/salsa-basics/">Articles</a></li>
+          <li><a class="hover:text-brand" href="/articles/">Articles</a></li>
           <li><a class="hover:text-brand" href="/#contact">Contact</a></li>
         </ul>
 
@@ -75,7 +83,7 @@
         data-menu-target="menu"
       >
         <li><a class="block py-1 hover:text-brand" href="/">Home</a></li>
-        <li><a class="block py-1 hover:text-brand" href="/articles/salsa-basics/">Articles</a></li>
+        <li><a class="block py-1 hover:text-brand" href="/articles/">Articles</a></li>
         <li><a class="block py-1 hover:text-brand" href="/#contact">Contact</a></li>
       </ul>
     </header>

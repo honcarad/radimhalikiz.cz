@@ -61,8 +61,12 @@ Preview runs at http://localhost:8080/.
 - The Netlify contact form (`data-netlify="true"`) does **not** work in local
   preview — only on Netlify (or via `netlify dev`). Keep the hidden `form-name`
   input in sync with the form's `name`.
-- Referenced web fonts (Inter/Poppins in `tailwind.theme.js`) are not actually
-  loaded yet; they fall back to `system-ui` until `<link>`/`@font-face` is added.
+- Theme (`tailwind.theme.js`) is matched to the live radimhalikiz.cz site: gold
+  `#f3c813` accent (`brand`), black `ink` text, Montserrat body + Poppins display.
+  The Google Fonts are loaded in `base.html`; headings get the display font via a
+  base layer in `src/css/tailwind.css`.
+- The `brand` accent is a LIGHT yellow — always put dark text on it
+  (`bg-brand text-ink`), never `text-white`, or it becomes unreadable.
 
 ## When making changes
 

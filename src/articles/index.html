@@ -1,0 +1,43 @@
+---
+layout: base.html
+title: Articles — Rhythm & Motion
+description: Dance guides, tips and stories from our studio.
+---
+
+<!--
+  Articles listing page.
+  Loops over the `articles` collection (every file tagged `tags: articles`),
+  newest first. Add a new article by creating a Markdown file in this folder
+  with `tags: articles` in its front matter and it will appear here automatically.
+-->
+<section class="mx-auto max-w-content px-4 py-16">
+  <header class="mb-10 text-center">
+    <h1 class="text-4xl font-extrabold tracking-tight">Articles</h1>
+    <p class="mt-3 text-muted">Dance guides, tips and stories from our studio.</p>
+  </header>
+
+  {% if collections.articles | length %}
+  <ul class="mx-auto max-w-3xl divide-y divide-gray-100">
+    {% for post in collections.articles | reverse %}
+    <li class="py-6">
+      <a href="{{ post.url }}" class="group block">
+        <h2 class="text-2xl font-bold group-hover:text-brand-700">
+          {{ post.data.title }}
+        </h2>
+        <p class="mt-1 text-sm text-muted">
+          By {{ post.data.author }}
+          {% if post.data.date %}
+          · <time datetime="{{ post.data.date | date('%Y-%m-%d') }}">{{ post.data.date | date("%B %e, %Y") }}</time>
+          {% endif %}
+        </p>
+        {% if post.data.description %}
+        <p class="mt-2 text-gray-600">{{ post.data.description }}</p>
+        {% endif %}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="text-center text-muted">No articles yet — check back soon!</p>
+  {% endif %}
+</section>

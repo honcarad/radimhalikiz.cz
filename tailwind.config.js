@@ -1,4 +1,9 @@
 /** @type {import('tailwindcss').Config} */
+
+// Design tokens live in a dedicated file so the theme can be configured in
+// one place. See tailwind.theme.js.
+const theme = require("./tailwind.theme");
+
 module.exports = {
   // Scan every template Eleventy might render so unused classes are purged.
   content: [
@@ -8,14 +13,9 @@ module.exports = {
     "./src/js/**/*.js",
   ],
   theme: {
+    // Spread the tokens into `extend` so they add to Tailwind's defaults.
     extend: {
-      // A small brand palette for the dance studio — tweak to taste.
-      colors: {
-        brand: {
-          DEFAULT: "#e11d48", // rose-600-ish accent
-          dark: "#9f1239",
-        },
-      },
+      ...theme,
     },
   },
   plugins: [],
